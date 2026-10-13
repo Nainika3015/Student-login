@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Login</title>
+</head>
+<body>
+
+    <h2>Registration</h2>
+
+    <input id="name" placeholder="Name"><br><br>
+    <input id="email" placeholder="Email"><br><br>
+    <input id="pass" type="password" placeholder="Password"><br><br>
+    <input id="confirm" type="password" placeholder="Confirm Password"><br><br>
+
+    <button onclick="register()">Register</button>
+
+    <h2>Login</h2>
+
+    <input id="le" placeholder="Email"><br><br>
+    <input id="lp" type="password" placeholder="Password"><br><br>
+
+    <button onclick="login()">Login</button>
+
+    <p id="msg"></p>
+
+    <script>
+        function register() {
+            let n = document.getElementById("name").value;
+            let e = document.getElementById("email").value;
+            let p = document.getElementById("pass").value;
+            let c = document.getElementById("confirm").value;
+
+            if (n == "" || e == "" || p == "" || c == "") {
+                document.getElementById("msg").innerText = "Fill all fields";
+            }
+            else if (p != c) {
+                document.getElementById("msg").innerText = "Passwords do not match";
+            }
+            else {
+                localStorage.setItem("name", n);
+                localStorage.setItem("email", e);
+                localStorage.setItem("password", p);
+
+                document.getElementById("msg").innerText = "Registration successful";
+            }
+        }
+
+        function login() {
+            let e = document.getElementById("le").value;
+            let p = document.getElementById("lp").value;
+
+            if (e == localStorage.getItem("email") &&
+                p == localStorage.getItem("password")) {
+                document.getElementById("msg").innerText =
+                    "Login successful. Welcome " + localStorage.getItem("name");
+            }
+            else {
+                document.getElementById("msg").innerText =
+                    "Invalid email or password";
+            }
+        }
+    </script>
+
+</body>
+</html>
